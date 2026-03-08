@@ -162,3 +162,40 @@ Operation Impact on crime, but magnitudes and precision vary. The Bacon
 decomposition is reassuring: the TWFE result is primarily driven by
 clean comparisons. The heterogeneity across cohorts (larger effects for
 early zones) is substantively interesting and warrants further analysis.
+
+## 2026-03-08 | Extension plan drafted (EXTENSION_PLAN.md)
+
+Created a comprehensive plan for extending the analysis past the last
+Operation Impact iteration (2012) through 2019, exploiting the post-Floyd
+v. City of New York (2013) enforcement collapse and the de Blasio
+mayoral transition (2014) as natural experiments.
+
+### Key components
+
+- **6 open questions** identified from the original paper: treatment
+  effect durability, mechanism decomposition (deterrence vs incapacitation),
+  treatment effect heterogeneity across cohorts, spillover dynamics,
+  racial disparities in enforcement, and differential crime category
+  responses to enforcement withdrawal.
+
+- **3 research designs:** (1) Extended panel 2004-2019 with active vs
+  post-enforcement treatment indicators, (2) DDD (zone × activation ×
+  enforcement era), (3) staggered treatment reversal using heterogeneous
+  timing of the enforcement collapse.
+
+- **Data requirements:** NYPD complaint data, arrest data, and SQF
+  microdata from NYC Open Data (2013-2019), Census TIGER/Line block
+  geography, plus existing impact zone shapefiles through Impact 22.
+
+- **Modern econometric methods:** Borusyak-Jaravel-Spiess imputation
+  estimator, de Chaisemartin-D'Haultfoeuille for treatment intensity,
+  Synthetic DiD, and Regression Discontinuity in Time around the Floyd
+  decision.
+
+- **Literature suggestions** spanning staggered DD methodology, policing
+  and crime economics, and stop-and-frisk/Floyd v. NYC research.
+
+### File organization
+
+- Moved `Operation Impact Zones/` from project root to `data-raw/`
+- Extension plan saved as `EXTENSION_PLAN.md` in project root
