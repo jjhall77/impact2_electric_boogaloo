@@ -17,3 +17,4 @@ Thumbs.db
 output/*.png
 output/*.pdf
 output/*_models.rds
+output/staggered_dd_results.rds

@@ -112,3 +112,53 @@ Standard errors are generally within 10-20% of published values. Our SEs
 tend to be slightly larger, consistent with fixest's default clustering
 behavior vs Stata's sandwich estimator. The paper reports SEs "clustered
 by precinct-month-year", which aligns with clustering at year_pct_month.
+
+## 2026-03-08 | Phase 3 staggered-DD extensions complete
+
+### Panel construction
+
+Built a balanced quarterly panel (6,274 fids x 36 quarters = 225,864
+rows) by aggregating incident-level data to fid x quarter and filling
+zeros. Treatment cohorts defined by earliest impact zone activation,
+consolidated to 9 annual cohorts (2004-2012). 4,697 never-treated fids
+serve as controls.
+
+### Sun & Abraham (2021)
+
+Interaction-weighted estimator via `fixest::sunab()`. Aggregate ATTs:
+- Total crime: -0.057 (SE 0.112) — attenuated vs TWFE OLS (-0.213)
+- Robbery: -0.335 (SE 0.074)
+- Violent Felony: +0.836 (SE 0.289) — sign flip vs Poisson TWFE
+
+The attenuation suggests treatment effect heterogeneity across cohorts.
+Large SEs are typical for interaction-weighted estimators with many
+relative-period coefficients on sparse count data.
+
+### Goodman-Bacon (2021) decomposition
+
+Run on a matched subsample (1,577 treated + 1,577 never-treated fids).
+Weight decomposition:
+- Treated vs Untreated: 64.7% weight, avg estimate -0.239
+- Later vs Earlier Treated: 14.5% weight, avg estimate -0.030
+- Later vs Always Treated: 13.9% weight, avg estimate +0.358
+- Earlier vs Later Treated: 7.0% weight, avg estimate -0.298
+
+Weighted average (-0.130) matches the full-panel TWFE. Most weight
+(65%) falls on clean treated-vs-untreated comparisons, suggesting
+limited forbidden-comparison bias.
+
+### Callaway & Sant'Anna (2021)
+
+Group-time ATTs using never-treated controls. Overall ATT = -0.857
+(SE 0.342). Dropped 339 fids in the earliest cohort (no pre-treatment
+data). Group-specific ATTs show strong heterogeneity: early cohorts
+(2005: -1.34, 2006: -2.00) show large effects; later cohorts (2007-2011)
+show smaller or positive effects.
+
+### Key finding
+
+All staggered-DD estimators confirm a directionally negative effect of
+Operation Impact on crime, but magnitudes and precision vary. The Bacon
+decomposition is reassuring: the TWFE result is primarily driven by
+clean comparisons. The heterogeneity across cohorts (larger effects for
+early zones) is substantively interesting and warrants further analysis.

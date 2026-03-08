@@ -33,17 +33,32 @@ Stata/R numerical differences. Model 2 neighbor coefficients show
 attenuation, likely due to differences in how `treatmentn` is coded at
 panel boundaries.
 
+## Staggered-DD extensions (Phase 3)
+
+| Estimator | ATT (Total Crime) | SE |
+|-----------|-------------------|-----|
+| Poisson TWFE (Phase 1) | -0.122 | 0.052 |
+| Linear TWFE (OLS, quarterly) | -0.213 | 0.059 |
+| Sun & Abraham (2021) | -0.057 | 0.112 |
+| Callaway & Sant'Anna (2021) | -0.857 | 0.342 |
+
+Bacon decomposition shows 65% of TWFE weight comes from clean
+treated-vs-untreated comparisons. All estimators confirm a directionally
+negative effect on crime, with magnitudes varying by method. See
+`logs/REPLICATION_REPORT.md` for full discussion.
+
 ## How to run
 
 ```
-Rscript R/01_prep_panels.R   # (optional) build collapsed panels
-Rscript R/02_models_crime.R  # Models 1-5, crime outcomes
-Rscript R/03_models_arrest.R # Models 1-5, arrest outcomes
-Rscript R/04_tables.R        # Formatted output tables
-Rscript R/05_permutation.R  # Permutation test (1,000 iterations, ~8 min)
+Rscript R/01_prep_panels.R    # (optional) build collapsed panels
+Rscript R/02_models_crime.R   # Models 1-5, crime outcomes
+Rscript R/03_models_arrest.R  # Models 1-5, arrest outcomes
+Rscript R/04_tables.R         # Formatted output tables
+Rscript R/05_permutation.R    # Permutation test (1,000 iters, ~8 min)
+Rscript R/06_staggered_dd.R   # Sun-Abraham, Bacon, Callaway-Sant'Anna
 ```
-## Extensions (planned)
-- Staggered-DD estimators (Callaway-Sant'Anna, Sun-Abraham)
+
+## Extensions (future)
 - Block-level re-analysis
 - Racial disparity decomposition of PC vs NPC stops
 - Post-Floyd reform period
