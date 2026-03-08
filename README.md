@@ -10,17 +10,38 @@ using modern staggered-DD estimators and finer spatial resolution.
 
 ## Replication status
 
-| Model | Target coef | Replicated coef | Status |
-|-------|------------|-----------------|--------|
-| M1 Total crime | -0.124 | — | ⬜ |
-| M1 Total arrests | +0.426 | — | ⬜ |
-| M2 Neighbor spillover | -0.072 | — | ⬜ |
-| M3 Event study | ~-0.10 | — | ⬜ |
-| M4 PC × Impact | -0.011 | — | ⬜ |
-| M4 NPC × Impact | +0.002 | — | ⬜ |
-| Robustness: permutation | max -0.020 | — | ⬜ |
+| Model | Target | Replicated | Status |
+|-------|--------|------------|--------|
+| M1 Total crime | -0.124 | -0.122 | :white_check_mark: |
+| M1 Total arrests | +0.426 | +0.418 | :white_check_mark: |
+| M2 Neighbor (crime) | -0.072 | -0.029 | :warning: |
+| M2 Neighbor (arrest) | +0.049 | +0.038 | :warning: |
+| M3 Event study (crime) | ~-0.10 | -0.114 | :white_check_mark: |
+| M3 Event study (arrest) | ~+0.48 | +0.482 | :white_check_mark: |
+| M4 PC × Impact (crime) | -0.011 | -0.013 | :white_check_mark: |
+| M4 NPC × Impact (crime) | +0.002 | -0.000 | :white_check_mark: |
+| M4 PC × Impact (arrest) | -0.006 | -0.006 | :white_check_mark: |
+| M4 NPC × Impact (arrest) | -0.006 | -0.005 | :white_check_mark: |
+| M5 Cubic trend (crime) | ~insig. | -0.023 | :white_check_mark: |
+| M5 Cubic trend (arrest) | ~sig.+ | +0.238 | :white_check_mark: |
+| Robustness: permutation (crime) | max -0.020 | max -0.022 | :white_check_mark: |
+| Robustness: permutation (arrest) | max +0.035 | max +0.041 | :white_check_mark: |
+
+All Model 1 coefficients across 10 outcome categories replicate within
+1-3% of published values. Models 2-5 match directionally with expected
+Stata/R numerical differences. Model 2 neighbor coefficients show
+attenuation, likely due to differences in how `treatmentn` is coded at
+panel boundaries.
 
 ## How to run
+
+```
+Rscript R/01_prep_panels.R   # (optional) build collapsed panels
+Rscript R/02_models_crime.R  # Models 1-5, crime outcomes
+Rscript R/03_models_arrest.R # Models 1-5, arrest outcomes
+Rscript R/04_tables.R        # Formatted output tables
+Rscript R/05_permutation.R  # Permutation test (1,000 iterations, ~8 min)
+```
 ## Extensions (planned)
 - Staggered-DD estimators (Callaway-Sant'Anna, Sun-Abraham)
 - Block-level re-analysis

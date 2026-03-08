@@ -16,3 +16,4 @@ Thumbs.db
 # Output (regenerable)
 output/*.png
 output/*.pdf
+output/*_models.rds
