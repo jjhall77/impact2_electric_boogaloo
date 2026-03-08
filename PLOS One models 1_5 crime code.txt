@@ -1,0 +1,101 @@
+
+tostring pct, replace
+gen year_pct_month=year_month+pct
+destring year_pct_month, replace
+
+*generates the event history controls*
+
+replace eventneg2=1 if eventneg1==1
+replace eventpos2=1 if eventpos1==1
+
+*MODEL 1*
+
+set more off
+xi: xtpoisson crimes1 treatment, fe i (year_pct_month) robust
+
+foreach var of varlist crimes3 crimes5 crimes6 crimes7 crimes10 offenses7 offenses15 offenses47 offenses{
+              xi: xtpoisson `var' treatment, fe i (year_pct_month) robust
+           
+			         
+          }
+		  
+*MODEL 2 with neighbors*
+
+gen treatmentn=0
+replace treatmentn=1 if year==2004 & impact3neigh>0
+replace treatmentn=1 if year==2005 & impact4neigh>0
+replace treatmentn=1 if year==2005 & month>=7 & impact5neigh>0
+replace treatmentn=1 if year==2006 & impact6neigh>0
+replace treatmentn=1 if year==2006 & month>=6 & impact7neigh>0
+replace treatmentn=1 if year==2007 & impact8neigh>0
+replace treatmentn=1 if year==2007 & month>=7 & impact9neigh>0
+replace treatmentn=1 if year==2008 & impact10neigh>0
+replace treatmentn=1 if year==2008 & month>=7 & impact11neigh>0
+replace treatmentn=1 if year==2009 & impact12neigh>0
+replace treatmentn=1 if year==2009 & month>=7 & impact13neigh>0
+replace treatmentn=1 if year==2010 & impact14neigh>0
+replace treatmentn=1 if year==2010 & month>=8 & impact15neigh>0
+replace treatmentn=1 if year==2011 & impact16aneigh>0
+replace treatmentn=1 if year==2011 & month>=8 & impact16hneigh>0
+  *assumes mid-year correction -- some switches before or after*
+replace treatmentn=1 if year==2012 & impact17neigh>0
+replace treatmentn=0 if treatment==1
+
+set more off
+xtpoisson crimes1 treatment treatmentn, fe i (year_pct_month) robust
+
+foreach var of varlist crimes3 crimes5 crimes6 crimes7 crimes10 offenses7 offenses15 offenses47 offenses{
+              xtpoisson `var' treatment treatmentn, fe i (year_pct_month) robust
+             
+			         
+          }	 
+
+*now using event history controls for -2 and +2 months*
+
+*MODEL 3*
+
+set more off
+xi: xtpoisson crimes1 eventneg2 eventneg1 eventpos1 eventpos2, fe i (year_pct_month) robust
+
+foreach var of varlist crimes3 crimes5 crimes6 crimes7 crimes10 offenses7 offenses15 offenses47 offenses{
+              xi: xtpoisson `var' eventneg2 eventneg1 eventpos1 eventpos2, fe i (year_pct_month) robust
+            			         
+          }
+
+*now with the pc vs. non_pc
+
+*MODEL 4*
+
+*now pc stops
+
+gen treatmentpc=treatment*cs_probcause
+gen cs_npc=stops-cs_probcause
+gen treatmentnpc=treatment*cs_npc
+
+set more off
+xtpoisson crimes1 treatment cs_probcause cs_npc treatmentpc treatmentnpc, fe i (year_pct_month) robust
+
+foreach var of varlist crimes3 crimes5 crimes6 crimes7 crimes10 offenses7 offenses15 offenses47 offenses{
+             xtpoisson `var' treatment cs_probcause cs_npc treatmentpc treatmentnpc, fe i (year_pct_month) robust
+             			         
+          }
+		  
+*MODEL 5*		  
+*basis spline at cubic model 1*
+sort pct year month
+qby pct (year month): generate monthly=ym(year, month)
+
+destring pct, replace
+forvalues pct=1/123 {
+bspline, xvar(monthly) gen(bs) power(3)
+	}
+
+set more off
+xtpoisson crimes1 treatment bs1 bs2 bs3, fe i(fid) robust
+
+set more off
+foreach var of varlist crimes3 crimes5 crimes6 crimes7 crimes10 offenses7 offenses15 offenses47 offenses{
+              xtpoisson `var' treatment bs1 bs2 bs3, fe i(fid) robust
+              
+			         
+          }

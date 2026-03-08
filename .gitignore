@@ -1,0 +1,18 @@
+# Data files (too large for git; document provenance in README)
+data-raw/*.dta
+data-raw/*.csv
+data/*.rds
+data/*.parquet
+
+# R artifacts
+.Rhistory
+.RData
+.Rproj.user/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Output (regenerable)
+output/*.png
+output/*.pdf
