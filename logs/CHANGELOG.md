@@ -199,3 +199,33 @@ mayoral transition (2014) as natural experiments.
 
 - Moved `Operation Impact Zones/` from project root to `data-raw/`
 - Extension plan saved as `EXTENSION_PLAN.md` in project root
+
+## 2026-03-15 | Python cross-validation and 75th Precinct robustness
+
+### Python cross-validation (python/01_model1_replication.py)
+
+Re-estimated all 20 Model 1 coefficients (10 crime + 10 arrest) using
+`pyfixest` v0.25.4 (Python port of R `fixest`). Results:
+
+- All 20 coefficients match R within 0.0004 (mean |diff| = 0.0002)
+- Confirms treatment effects are not an artifact of the R `fixest`
+  implementation
+- N values match R exactly for most outcomes
+- pyfixest v0.40.1 requires Python 3.10+; used v0.25.4 for Python 3.9
+  compatibility
+
+### 75th Precinct exclusion (R/07_robustness_no75.R)
+
+Re-estimated Model 1 excluding precinct 75 (East New York, Brooklyn).
+The 75th Precinct has a treatment rate of 55% (vs 11% overall) with
+170 unique blocks, representing 3.1% of crime rows and 3.9% of arrest
+rows.
+
+Results:
+- Zero sign flips across all 20 outcomes
+- Crime: mean |diff| = 0.0052, max = 0.0114 (Burglary)
+- Arrest: mean |diff| = 0.0070, max = 0.0255 (Burglary)
+- All effects remain substantively unchanged, confirming results are not
+  driven by a single precinct
+- Largest movement: arrest Burglary (0.374 → 0.400), indicating the
+  75th Precinct slightly attenuated the burglary arrest coefficient

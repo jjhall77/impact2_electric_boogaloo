@@ -1,0 +1,21 @@
+type,variable,label,python_coef,python_se,python_n,r_coef,paper_coef,py_vs_r_diff,py_vs_paper_diff
+crime,crimes1,Total,-0.1216,0.0089,840259,-0.122,-0.124,0.0004,0.0024
+crime,offenses47,Robbery,-0.1602,0.0135,839630,-0.16,-0.157,0.0002,0.0032
+crime,offenses15,Assault,-0.1332,0.0139,838895,-0.133,-0.131,0.0002,0.0022
+crime,offenses7,Burglary,-0.6142,0.0171,839278,-0.614,-0.611,0.0002,0.0032
+crime,crimes10,Weapons,0.3112,0.0177,824899,0.311,0.314,0.0002,0.0028
+crime,crimes7,Misd.,-0.2016,0.0102,840219,-0.202,-0.198,0.0004,0.0036
+crime,crimes6,Other Felony,0.6024,0.0231,797795,0.602,0.614,0.0004,0.0116
+crime,crimes5,Drugs,-0.0289,0.0135,833211,-0.029,-0.026,0.0001,0.0029
+crime,crimes3,Property Felony,-0.3023,0.0108,840077,-0.302,-0.296,0.0003,0.0063
+crime,offenses,Violent Felony,-0.1276,0.0077,840297,-0.128,-0.12,0.0004,0.0076
+arrest,crimes1,Violent Felony,0.022,0.0217,341014,0.022,0.024,0.0,0.002
+arrest,crimes3,Property Felony,1.1463,0.0368,340758,1.146,1.174,0.0003,0.0277
+arrest,crimes5,Drugs,-0.0837,0.0126,340924,-0.084,-0.083,0.0003,0.0007
+arrest,crimes6,Other Felony,0.518,0.028,303617,0.518,0.533,0.0,0.015
+arrest,crimes7,Misd.,0.2928,0.028,340440,0.293,0.298,0.0002,0.0052
+arrest,crimes10,Weapons,0.277,0.0237,326669,0.277,0.279,0.0,0.002
+arrest,offenses8,Burglary,0.3741,0.0782,182141,0.374,0.387,0.0001,0.0129
+arrest,offenses18,Assault,-0.0183,0.0392,306921,-0.018,-0.017,0.0003,0.0013
+arrest,offenses57,Robbery,-0.005,0.0354,313083,-0.005,-0.002,0.0,0.003
+arrest,offenses,Total,0.4184,0.0154,341828,0.418,0.426,0.0004,0.0076
