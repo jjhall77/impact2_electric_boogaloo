@@ -229,3 +229,16 @@ Results:
   driven by a single precinct
 - Largest movement: arrest Burglary (0.374 → 0.400), indicating the
   75th Precinct slightly attenuated the burglary arrest coefficient
+
+## 2026-03-15 | Replication report updated with plots
+
+Added all 7 output plots to the replication report PDF:
+- Permutation test histograms (crime + arrest)
+- Sun & Abraham event studies (total crime, robbery, violent felony)
+- Callaway & Sant'Anna event study
+- Goodman-Bacon decomposition scatter
+
+Report now 12 pages with embedded figures, suitable for sharing with
+original authors. Added new Phase 4 (Python cross-validation) and
+Phase 5 (75th Precinct exclusion) sections, plus a summary table of
+all replication phases and known discrepancies.

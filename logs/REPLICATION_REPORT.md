@@ -162,6 +162,10 @@ estimate). Our max placebo values are very close to those reported in
 the paper, confirming that the treatment effect is not an artifact of
 spatial clustering or group structure.
 
+![Permutation test: Crime (Total). The true estimate (-0.122) falls far outside the distribution of 1,000 placebo coefficients.](../output/permutation_crime.png){width=85%}
+
+![Permutation test: Arrests (Total). The true estimate (+0.418) falls far outside the placebo distribution.](../output/permutation_arrest.png){width=85%}
+
 ### Standard error comparison
 
 SEs are generally within 10-20% of published values. Our SEs tend to
@@ -226,14 +230,15 @@ in the staggered-DD literature.
 
 ### Event study plots
 
-The Sun & Abraham event study shows:
-- Pre-treatment coefficients are noisy but centered around zero,
-  consistent with parallel trends.
-- Post-treatment coefficients are generally negative but imprecise,
-  consistent with a crime reduction that varies across cohorts and
-  relative periods.
+![Sun & Abraham event study: Total Crime. Pre-treatment coefficients are centered around zero (parallel trends). Post-treatment coefficients are negative but imprecise.](../output/sunab_crimes1.png){width=85%}
 
-The C&S event study shows a similar pattern with wider confidence bands.
+![Sun & Abraham event study: Robbery. Shows a clearer negative post-treatment effect than total crime.](../output/sunab_offenses47.png){width=85%}
+
+![Sun & Abraham event study: Violent Felony. Illustrates treatment effect heterogeneity across crime types.](../output/sunab_offenses.png){width=85%}
+
+![Callaway & Sant'Anna event study: Total Crime. Similar pattern to Sun & Abraham with wider confidence bands.](../output/cs_event_study.png){width=85%}
+
+![Goodman-Bacon decomposition. Each point is a 2x2 DD comparison; size indicates weight. The majority of weight (65%) falls on clean treated-vs-untreated comparisons.](../output/bacon_decomp.png){width=85%}
 
 ### Key takeaway
 
