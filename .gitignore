@@ -1,8 +1,13 @@
 # Data files (too large for git; document provenance in README)
 data-raw/*.dta
 data-raw/*.csv
+data-raw/sqf/
+data-raw/nycb2020_26a/
+data-raw/nypp_*/
 data/*.rds
 data/*.parquet
+data/*.csv
+data/*.json
 
 # R artifacts
 .Rhistory
@@ -17,8 +22,23 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-# Output (regenerable)
+# Output (regenerable from R scripts)
 output/*.png
 output/*.pdf
-output/*_models.rds
-output/staggered_dd_results.rds
+output/*.rds
+output/*.tex
+output/*.aux
+output/*.log
+output/*.out
+output/*.csv
+output/*.json
+
+# Literature (PDFs too large; keep parsed markdown)
+literature/*.pdf
+literature/parsed/
+
+# Quotas intermediate data
+quotas/*.rds
+
+# Misc
+logs/
